@@ -1,0 +1,113 @@
+---
+output: html_document
+keep_md: true
+---
+
+# Projeto
+
+## ME430 - Técnicas de Amostragem
+
+### Propósito
+
+O projeto deverá envolver:
+
+1. uso de técnicas vistas durante o curso para desenvolver um plano amostral para um problema de estimação no qual amostragem seja uma ferramenta adequada a ser utilizada;
+2. seleção de uma amostra seguindo o plano amostral proposto;
+3. coleta de dados apropriados a partir da amostra;
+4. desenvolvimento e aplicação de fórmulas apropriadas para produzir todas as estimativas e e respectivas variâncias necessárias para o problema escolhido;
+5. dois relatórios descrevendo os métodos e resultados para avaliação e apresentação em classe. 
+
+
+### Grupos
+
+Teremos um total de 5 grupos, com 5 alunos cada.
+
+
+### Tópicos para o projeto
+
+  Um projeto apropriado seria qualquer problema onde a teoria de amostragem é uma ferramenta lógica adequada para estimar alguma característica de uma população real. Deve-se, no entanto, considerar um problema que possa ser finalizado até o final do semestre. 
+
+### Relatórios e notas
+
+  Cada projeto será avaliado baseando-se somente na apresentação do seminário e no conteúdo de dois relatórios em que o problema de amostragem/estimação e os métodos utilizados estejam descritos com detalhes suficientes para serem avaliados e em que as conclusões da pesquisa sejam apresentadas.  Resumindo, o grupo deve preparar:
+  
+1. Relatório de Plano de Pesquisa --- Uma descrição da população amostrada, do problema de estimação, do plano amostral e da estratégia de estimação. O relatório correspoderá a 30% da nota referente ao projeto. 
+2. Relatório de Conclusão da Pesquisa --- Uma descrição do que realmente foi feito com relação à amostragem e à coleta de dados, além das conclusões da pesquisa. Este relatório corresponderá a 50% da nota referente ao projeto. Este relatório só será considerado se o anterior tiver sido entregue dentro do prazo.
+
+3. Apresentação – Uma apresentação (máximo 15 minutos) do problema considerado, métodos usados para amostragem, estimação, e conclusões finais. Esta parte corresponderá a 20% da nota referente ao projeto. Todo o grupo deve estar presente em todas as apresentações. Caso um membro do grupo não esteja presente, a nota será reduzida.
+
+$$\mbox{Nota do Projeto}= 0.3 \times \mbox{Relatório 1} + 0.5 \times\mbox{Relatório 2}+0.2\times\mbox{Apresentação}\times\frac{\mbox{total de alunos do grupo presentes}}{\mbox{total de alunos do grupo}}$$
+
+Os relatórios devem conter informações sobre todos os tópicos listados a seguir.
+
+### Primeiro Relatório: Plano de Pesquisa
+
+1.   Definição do problema
+*	Qual a pergunta de interesse? O que será estimado neste projeto?
+*	Qual a população a ser amostrada?  (Defina explicitamente o critério de inclusão de uma UE na população alvo e na população amostrada. Se você planeja coletar a amostra ao longo do tempo, não se esqueça de incluir a data/período na sua definição de população alvo e na população amostrada.  Por exemplo, pessoas visitando uma loja num período de dois dias.) 
+*	Qual é a UE desse projeto? 
+*	Quais medidas/informações da UEs serão coletadas? 
+*	Baseando-se no “custo” do seu tamanho amostral (tempo disponível do seu grupo para amostragem e coleta de dados), qual seria um tamanho de amostra factível? Qual margem de erro você espera para suas estimativas? 
+
+2.	Proposta de Plano Amostral
+*	Descreva seu plano amostral proposto de maneira concisa. 
+*	Estratificação será empregada para seleção da amostra? Se sim, como e com qual propósito?
+*	Utilizará amostra por conglomerados?  Quantos estágios?
+*	Defina a UE e como ela será selecionada.
+*	A probabilidade de amostragem será a mesma para cada UE da amostra? Caso não seja, descreva como calcular a probabilidade de seleção para cada UE. 
+*	Qual o tamanho da amostra e como ela será alocada entre os estratos e estágios amostrais? No que você se baseará para fazer as decisões de alocação da amostra?
+
+
+3.	Coleta de dados e estimação
+*	Como as observações serão coletadas? 
+*	Descreva seu método de estimação do(s) parâmetro(s) populacional e da variância associada às estimativas.
+
+### Segundo Relatório: Coleta de dados e Conclusão da Pesquisa
+
+
+1.  Amostragem 
+*	Quais os passos do procedimento que você acabou realmente utilizando para coletar sua amostra?
+*	Como esses procedimentos diferem (se for o caso) do plano amostral proposto originalmente?
+*	Você encontrou problemas ao coletar os dados?  Se sim, descreva brevemente como você lidou com esses problemas.
+
+2.	Coleta de dados
+*	Como as observações/medidas foram feitas na amostra coletada?
+*	Houve algum problema de medição? Se sim, como você lidou com esses problemas?
+*	Quais suas considerações sobre o efeito de erros não amostrais na sua pesquisa?
+
+3.	Estimação
+*	Como o(s) parâmetro(s) populacional foi (foram) estimado(s) (apresente a fórmula exata utilizada)?
+*	Como você estimou a variância associada à(s) estimativa(s) (apresente a fórmula exata utilizada)?
+*     Se você utilizou algum software, apresente em detalhes o código.
+
+
+4.	Conclusões
+*	Apresente as estimativas geradas a partir do estudo.
+*	Quão boas você as considera, levando em conta a precisão estatística e outros problemas que você suspeita ou pode detectar?
+
+
+### Sequência típica de decisões de um plano amostral
+
+1. Definir explicitamente a população da qual se está retirando a amostra. 
+2. Qual é a UE? 
+3. Qual é a medida/observação de interesse obtida a partir da UE?
+4. Estabeleça a hierarquia (com as UEs formando a base) na qual a amostra será coletada. 
+5. Decidir em quantos estágios e quais as UEs em cada estágio.
+6. Quão grande será a amostra total?
+7. Caso a amostra seja estratificada, explicar como isso será feito.
+8. Como a amostra será coletada em cada estágio?
+9. Como a amostra será escolhida em cada estrato amostral?
+10. Quais serão os tamanhos amostrais/alocação entre estágios e/ou estratos?
+11. Quão boas são as estimativas obtidas a partir do plano amostral proposto?
+
+### Observações
+
+
+Observações: Antes de iniciar, recomenda-se que as seções 1.6 à 1.10 do livro Bolfarine & Bussab sejam lidas com atenção, pois  auxiliarão na execução do projeto.
+
+Os relatórios deverão ser entregues utilizando a plataforma “Moodle”. O formato do arquivo deve ser obrigatoriamente .Rmd, além de eventuais arquivos auxiliares. Irei rodar o .Rmd no R studio, e irei corrigir o HTML gerado a partir do mesmo, portanto verifique com muito cuidado os arquivos e dependências.
+
+Caso necessite gerar números aleatórios, salve a semente (comando set.seed) e verifique que seu código produz sempre os mesmos resultados.
+
+Importante: ANTES de iniciar um novo .Rmd ou de editar a partir de um .Rmd postado no curso, você deverá alterar a configuração de codificação para UTF-8, caso contrário os caracteres acentuados ficarão desconfigurados.
+
