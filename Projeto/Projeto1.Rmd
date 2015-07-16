@@ -78,7 +78,7 @@ Os relatórios devem conter informações sobre todos os tópicos listados a seg
 3.	Estimação
 *	Como o(s) parâmetro(s) populacional foi (foram) estimado(s) (apresente a fórmula exata utilizada)?
 *	Como você estimou a variância associada à(s) estimativa(s) (apresente a fórmula exata utilizada)?
-*     Se você utilizou algum software, apresente em detalhes o código.
+* Se você utilizou algum software, apresente em detalhes o código.
 
 
 4.	Conclusões
@@ -103,6 +103,8 @@ Os relatórios devem conter informações sobre todos os tópicos listados a seg
 ### Formatação dos relatórios
 
 O grupo deverá submeter os relatórios em um arquivo .Rmd, seguindo o modelo de formatação do arquivo **manuscript_template.Rmd**. Copie todos os arquivos da pasta [Template](./Template), renomeie e modifique **manuscript_template.Rmd**.
+
+
 
 ### Observações
 
