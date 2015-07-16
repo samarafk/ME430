@@ -103,8 +103,9 @@ Os relatórios devem conter informações sobre todos os tópicos listados a seg
 ### Formatação dos relatórios
 
 O grupo deverá submeter os relatórios em um arquivo .Rmd, seguindo o modelo de formatação do arquivo **manuscript_template.Rmd**. Copie todos os arquivos da pasta [Template](./Template), renomeie e modifique **manuscript_template.Rmd**.
+Todos os arquivos necessários para gerar o .pdf a partir do .Rmd deverão ser submetidos.
 
-
+Importante: ANTES de iniciar um novo .Rmd ou de editar a partir de um .Rmd postado no curso, você deverá alterar a configuração de codificação para UTF-8, caso contrário os caracteres acentuados ficarão desconfigurados.
 
 ### Observações
 
@@ -115,5 +116,5 @@ Os relatórios deverão ser entregues utilizando a plataforma “Moodle”. O fo
 
 Caso necessite gerar números aleatórios, salve a semente (comando set.seed) e verifique que seu código produz sempre os mesmos resultados.
 
-Importante: ANTES de iniciar um novo .Rmd ou de editar a partir de um .Rmd postado no curso, você deverá alterar a configuração de codificação para UTF-8, caso contrário os caracteres acentuados ficarão desconfigurados.
+
 
