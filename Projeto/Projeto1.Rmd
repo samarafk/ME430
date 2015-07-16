@@ -100,6 +100,10 @@ Os relatórios devem conter informações sobre todos os tópicos listados a seg
 10. Quais serão os tamanhos amostrais/alocação entre estágios e/ou estratos?
 11. Quão boas são as estimativas obtidas a partir do plano amostral proposto?
 
+### Formatação dos relatórios
+
+O grupo deverá submeter os relatórios em um arquivo .Rmd, seguindo o modelo de formatação do arquivo **manuscript_template.Rmd**. Copie todos os arquivos da pasta [Template](./Template), renomeie e modifique **manuscript_template.Rmd**.
+
 ### Observações
 
 
