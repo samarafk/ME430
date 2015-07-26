@@ -107,7 +107,7 @@ Importante: ANTES de iniciar um novo .Rmd ou de editar a partir de um .Rmd posta
 
 Observações: Antes de iniciar, recomenda-se que as seções 1.6 à 1.10 do livro Bolfarine & Bussab sejam lidas com atenção, pois  auxiliarão na execução do projeto.
 
-Os relatórios deverão ser entregues utilizando a plataforma “Moodle”. O formato do arquivo deve ser obrigatoriamente .Rmd, além de eventuais arquivos auxiliares. Irei rodar o .Rmd no R studio, e irei corrigir o HTML gerado a partir do mesmo, portanto verifique com muito cuidado os arquivos e dependências.
+Os relatórios deverão ser entregues utilizando a plataforma “Moodle”. O formato do arquivo deve ser obrigatoriamente .Rmd, além de eventuais arquivos auxiliares. Os trabalhos serão avaliados também por um sistema de *peer review*, isto é, os colegas terão parte na avaliação dos trabalhos dos outros grupos.
 
 Caso necessite gerar números aleatórios, salve a semente (comando set.seed) e verifique que seu código produz sempre os mesmos resultados.
 
