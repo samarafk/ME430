@@ -1,6 +1,7 @@
 ---
-output: html_document
-keep_md: true
+output: 
+  html_document:
+    keep_md: true
 ---
 
 # Projeto
@@ -20,8 +21,7 @@ O projeto deverá envolver:
 
 ### Grupos
 
-Teremos um total de 5 grupos, com 5 alunos cada.
-
+Cada grupo deverá ter no máximo 5 alunos. Os grupos não poderão ser desfeitos ou modificados.
 
 ### Tópicos para o projeto
 
