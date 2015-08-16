@@ -16,7 +16,7 @@ O projeto deverá envolver:
 
 ### Grupos
 
-Cada grupo deverá ter no máximo 5 alunos. Os grupos não poderão ser desfeitos ou modificados.
+Cada grupo deverá ter no máximo 6 alunos. Os grupos não poderão ser desfeitos ou modificados.
 
 ### Tópicos para o projeto
 
