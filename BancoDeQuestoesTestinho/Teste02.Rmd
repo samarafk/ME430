@@ -1,0 +1,19 @@
+---
+title: "Teste 2"
+subtitle: ME430 - Técnicas de Amostragem
+output: 
+   html_document:
+     keep_md: true
+---
+
+
+Considere uma população com $N=6$ elementos, isto é, $\mathcal{U}=\{1,2,3,4,5,6\}$ com o vetor de características populacionais $\mathbf{D}=(2,6,10,8,10,12)$. Desta população, uma amostra de $n=2$ elementos é selecionada sem reposição. Considere o plano amostral $A$ que associa a cada possível amostra de $\mathcal{S}_A$ a mesma probabilidade.
+
+a. Calcule $Var_A[f_i]$ e $Cov[f_i,f_j]$, $i\neq j$, para algum $i$ e $j$ que você escolher. Você acha que o plano amostral é simétrico? Por quê?
+
+b. Seja $t(\mathbf{s})$ o total da amostra $\mathbf{s}$. Encontre a distribuição de $t(\mathbf{s})$. Calcule $E_A(t)$ e $Var_A(t)$.
+
+c. Usando o item b, verifique se a média amostral $\bar{y}$ é um estimador não viciado de $\mu$. Calcule $Var[\bar{y}]$.
+
+Fonte: Exercício 2.6 do livro *Elementos de Amostragem* - Bolfarine \& Bussab.
+
