@@ -163,7 +163,7 @@ Na simulação, fizemos $10000$ amostras de tamanho $n$ e estudamos propriedades
 
 2. A variância teórica, no caso em que não conhecemos a população, é possível de ser calculada? Explique. 
 
-3. Qual a utilidade de calcularmos a variância teórica a partir de dados simulados? O que podemos aprender, através da variância teórica, sobre a estimativa do parâmetro de interesse? Discuta e coloque no contexto do problema proposto no início do exercício.
+3. Qual a utilidade de calcularmos a variância teórica e compararmos com a varância das estimativas obtidas através das simulações? O que podemos aprender, através da variância teórica, sobre a estimativa do parâmetro de interesse? Discuta e coloque no contexto do problema proposto.
 
 
 4. Na prática, coletamos penas uma amostra e usamos as informações da mesma para calcularmos um intervalo de confiança para $\bar{Y}$, por exemplo. O Teorema Central do Limite exige que o tamanho da amostra seja suficientemente grande. Utilize 10000 simulações em cada cenário (tamanho da amostra e com/sem reposição) para estudar a real cobertura do intervalo de confiança. Produza uma tabela com: Tamanho da Amostra, Reposição, Proporção dos 10000 IC de 95% produzidos que incluem $\bar{Y}$.
