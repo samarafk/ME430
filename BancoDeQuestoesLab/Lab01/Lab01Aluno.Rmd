@@ -130,8 +130,14 @@ options=list(
 ```
 
 
+
+1. Observe os histogramas obtidos para $B=10000$ simulações para cada caso (combinação de tamanho amostral e tipo de seleção de amostra). O que você nota com relação à distribuição de probabilidade da média amostral conforme o tamanho amostral aumenta. Ela se aproxima de alguma distribuição conhecida? Discuta.
+
+
+
+
 Para resumir todos os casos em uma única tabela, iremos simular 10000 amostras para cada caso: combinação de tamanho amostral e tipo de seleção de amostral (com ou sem reposição). Para cada caso, iremos calcular a média das 10000 médias obtidas e também calculamos a variância amostral das 10000 médias obtidas.
-Vocês irão verificar que a variância amostral teórica é igual $\sigma^2/n$ quando usamos $AAS_c$. No caso $AAS_s$, a variância amostral teórica é $\frac{1}{n}S^2(1-n/N)$.
+Vocês irão verificar (produzindo uma tabela com o código abaixo) que a variância amostral teórica é igual $\sigma^2/n$ quando usamos $AAS_c$. No caso $AAS_s$, a variância amostral teórica é $\frac{1}{n}S^2(1-n/N)$. 
 
 
 ```{r,echo=FALSE,eval=FALSE}
@@ -152,9 +158,6 @@ colnames(BB) <- c("Tamanho da Amostra","Reposição?","Média Amostral: Média d
 library(printr)
 BB
 ```
-
-1. Observe os histogramas obtidos para $B=10000$ simulações para cada caso (combinação de tamanho amostral e tipo de seleção de amostra). O que você nota com relação à distribuição de probabilidade da média amostral conforme o tamanho amostral aumenta. Ela se aproxima de alguma distribuição conhecida? Discuta.
-
 
 Na simulação, fizemos $10000$ amostras de tamanho $n$ e estudamos propriedades do estimador utilizado: a média. Agora, pense no caso real, em que você não conhece a população e irá fazer uma amostra.  Note que, no caso real, só iremos fazer **uma** amostra de tamanho $n$. Portanto, obteremos apenas uma média amostral: aquela da amostra que coletamos. 
 
