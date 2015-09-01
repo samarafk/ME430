@@ -131,7 +131,7 @@ options=list(
 
 
 
-1. Observe os histogramas obtidos para $B=10000$ simulações para cada caso (combinação de tamanho amostral e tipo de seleção de amostra). O que você nota com relação à distribuição de probabilidade da média amostral conforme o tamanho amostral aumenta. Ela se aproxima de alguma distribuição conhecida? Discuta.
+**Pergunta 1.** Observe os histogramas obtidos para $B=10000$ simulações para cada caso (combinação de tamanho amostral e tipo de seleção de amostra). O que você nota com relação à distribuição de probabilidade da média amostral conforme o tamanho amostral aumenta. Ela se aproxima de alguma distribuição conhecida? Discuta.
 
 
 
@@ -159,12 +159,12 @@ library(printr)
 BB
 ```
 
-2. A variância teórica, no caso em que não conhecemos a população, é possível de ser calculada? Explique. 
+**Pergunta 2.** A variância teórica, no caso em que não conhecemos a população, é possível de ser calculada? Explique. 
 
-3. Qual a utilidade de calcularmos a variância teórica e compararmos com a varância das estimativas obtidas através das simulações? O que podemos aprender, através da variância teórica, sobre a estimativa do parâmetro de interesse? Discuta e coloque no contexto do problema proposto.
+**Pergunta 3.** Qual a utilidade de calcularmos a variância teórica e compararmos com a varância das estimativas obtidas através das simulações? O que podemos aprender, através da variância teórica, sobre a estimativa do parâmetro de interesse? Discuta e coloque no contexto do problema proposto.
 
 
-4. Na prática, coletamos apenas uma amostra e usamos as informações da mesma para calcularmos um intervalo de confiança para $\bar{Y}$, por exemplo. O Teorema Central do Limite exige que o tamanho da amostra seja suficientemente grande. Utilize 10000 simulações em cada cenário (tamanho da amostra e com/sem reposição) para estudar a real cobertura do intervalo de confiança. Produza uma tabela com: Tamanho da Amostra, Reposição, Proporção dos 10000 IC de 95% produzidos que incluem $\bar{Y}$.
+**Pergunta 4.** Na prática, coletamos apenas uma amostra e usamos as informações da mesma para calcularmos um intervalo de confiança para $\bar{Y}$, por exemplo. O Teorema Central do Limite exige que o tamanho da amostra seja suficientemente grande. Utilize 10000 simulações em cada cenário (tamanho da amostra e com/sem reposição) para estudar a real cobertura do intervalo de confiança. Produza uma tabela com: Tamanho da Amostra, Reposição, Proporção dos 10000 IC de 95% produzidos que incluem $\bar{Y}$.
 
 
 ```{r,echo=FALSE,eval=FALSE}
@@ -179,6 +179,6 @@ colnames(CC) <- c("Tamanho da Amostra","Reposição?","Proporção")
 CC
 ```
 
-5. Comente os resultados resumidos através da tabela do item 4.
+**Pergunta 5.** Comente os resultados resumidos através da tabela do item 4.
 
 
