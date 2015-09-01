@@ -1,0 +1,184 @@
+---
+title: "Laboratório 1"
+subtitle: ME430 - 2015
+author: SEU NOME e RA
+runtime: shiny
+output: html_document
+---
+
+
+Neste laboratório, investigaremos os meios pelos quais as estatísticas de uma amostra aleatória podem servir como estimativas pontuais de parâmetros populacionais. Estamos interessados em formular uma *distribuição amostral* de nossa estimativa para aprender sobre as propriedades da estimativa, como sua distribuição.
+
+## População conhecida
+
+Vamos analisar dados do setor imobiliário da cidade de Ames, no estado de Iowa, Estados Unidos. Os detalhes de cada transação imobiliária na cidade de Ames é registrada pelo escritório da Secretaria Municipal da Receita da cidade. Para este laboratório, consideraremos todas as vendas de casa em Ames entre 2006 e 2010. Essa coleção representa nossa população de interesse. Queremos aprender sobre essas vendas de casa retirando pequenas amostra da população completa. 
+
+Vamos importar os dados:
+
+```{r,echo=TRUE}
+if (!file.exists("ames.RData"))
+{
+download.file("http://www.openintro.org/stat/data/ames.RData", destfile = "ames.RData")
+}
+
+load("ames.RData")
+```
+
+
+Vemos que há muitas variáveis em nosso conjunto de dados, o suficiente para realizar uma análise aprofundada. No momento, restringiremos nossa atenção para somente duas variáveis: a área habitável da casa acima do nível do solo em pés quadrados (`Gr.Liv.Area`) e o preço da venda (`SalePrice`). Para economizar esforços ao longo do laboratório, crie duas variáveis com nomes curtos para representar essas duas variáveis do conjunto de dados.
+
+```{r,echo=TRUE}
+area <- ames$Gr.Liv.Area
+
+price <- ames$SalePrice
+```
+
+Denotaremos cada transação por um número, $i$ ($i=1,2,\ldots,`r length(area)`$) e a área da casa vendida por $Y_i$.
+
+
+Vamos dar uma olhada na distribuição da área em nossa população de transações calculando algumas estatísticas sumárias e criando um histograma. Se você quiser ajustar a largura dos segmento do seu histograma para exibir um pouco mais de detalhes, você pode fazê-lo mudando o argumento `breaks`.
+
+```{r,echo=FALSE}
+hist(area,breaks=20,col="lightblue",ylab="Frequência",xlab="Área em pés quadrados",main= " ")
+
+Populacao <- data.frame(id=1:length(area),Y=area)
+
+```
+
+A área média na população considerada é $\bar{Y}=\frac{1}{N}\sum_{i=1}^NY_i=`r round(mean(area),2)`$. Temos duas maneiras de definir a variância populacional: $S^2=\frac{1}{N-1}\sum_{i=1}^N(Y_i-\bar{Y})^2=`r format(round(var(area),2),scientific=FALSE)`$ e $\sigma^2=\frac{1}{N}\sum_{i=1}^N(Y_i-\bar{Y})^2=`r format(round(mean((area-mean(area))^2),2),scientific=FALSE)`$.
+
+Descreva a distribuição das áreas na população.
+
+
+
+## Distribuição amostral
+
+Agora, imagine que toda esta informação nos seja desconhecida. Vamos, então, coletar uma amostra aleatória dentre as todas as `r length(area)` transações da população. O primeiro passo para coletar uma amostra aleatória a partir de uma população é listar todos os elementos, $N$, da mesma. A partir da lista devemos escolher, aleatoriamente, uma amostra de tamanho $n$. Deve-se definir, também, se a seleção aleatória será com ou sem reposição dos elementos da população.
+
+
+Temos $N=`r dim(Populacao)[1]`$ transações. Há $N^n$ maneiras de amostrarmos $n$ elementos dentre $N$ com reposição. Temos $\binom{N}{n}$ maneiras de amostrarmos $n$ elementos dentre $N$ sem reposição.
+
+Se estivermos interessados em estimar a área habitável média na cidade de Ames com base em uma amostra, podemos utilizar o seguite comando para sondar a população.
+
+```{r,echo=TRUE,eval=FALSE}
+samp1 <- sample(area, 50)
+```
+
+Para saber mais sobre o comando `sample`, escreva `?sample` na linha de comando. A amostragem acima foi com ou sem reposição?
+
+Esse comando retira uma $AAS$ de tamanho 50 do vetor `area`, que é atribuída à variável `samp1`. É como se fôssemos ao banco de dados da Secretaria Municipal da Fazendo e retirássemos os arquivos de 50 vendas de casas aleatoriamente. 
+
+
+Considere que uma amostra tenha sido feita e que, para cada transação amostrada, tenhamos coletado a informação desejada: $Y_i^*$. Como temos interesse na área média da população toda, iremos usar a média das áreas observadas na amostra, denotada por $\bar{Y}^*$.
+
+As respostas da população, $Y_i\,,\forall i$, nos são desconhecidas, porém "fixas". Já a média obtida através de uma amostra aleatória, $\bar{Y}^*$, muda cada vez que selecionarmos uma amostra novamente. Sendo uma variável aleatória, $\bar{Y}^*$ tem distribuição de probabilidade, esperança e variância. Para estudarmos sua distribuição de probabilidade, devemos considerar todas as $\binom{N}{n}$ amostras possíveis (caso sem reposição), calcular a distância média para cada uma dessas amostras e então, calcular a probabilidade de cada valor possível que a média da amostra pode assumir. Com a distribuição definida, basta calcular esperança e variância.
+
+Vimos durante a aula que, para obter a distribuição de uma estatística obtida através de uma amostra aleatória, é preciso avaliar que valores ela assume em cada uma das amostras possíveis. Como até para um exemplo com uma população reduzida a número de amostras é bastante grande, iremos usar simulação para estudar a distribuição de probabilidade da média amostral, $\bar{Y}^*$.
+
+Para efeitos de simulação, usaremos a função a seguir, que seleciona aleatoriamente uma amostra de tamanho $n$ a partir de dados completos de uma população de tamanho $N$.
+
+```{r}
+Simulacao <- function(ID,Y,n,reposicao="nao"){
+  if (reposicao=="nao")
+    {
+    idAmostrado <- sample(x=ID,size=n,replace=FALSE)
+    }
+  else
+    {
+    idAmostrado <- sample(x=ID,size=n,replace=TRUE)
+    }
+    YAmostrado <- Y[idAmostrado]
+    Media <- mean(YAmostrado)
+  return(list(idAmostrado=idAmostrado,YAmostrado=YAmostrado,Media=Media))
+  }
+```
+
+Portanto, se quisermos simular uma amostra de tamanho $n=20$ da população considerada, com reposição, usamos o comando:
+
+```{r}
+Simulacao(ID=Populacao$id,Y=Populacao$Y,n=10,reposicao="sim")
+```
+
+Note que a função retorna uma lista com 3 elementos: o identificador de cada transação da população selecionado na amostra, a área e a média da amostra. Para estudar a distribuição de probabilidade de $\bar{Y}^*$ estamos interessados apenas no terceiro elemento desta lista de resultados. Note também que cada vez que executamos o comando acima obtemos valores diferentes.
+
+A função a seguir repete $B$ vezes a simulação de seleção de amostra aleatória de tamanho $n$ a partir da população:
+
+```{r}
+DistribuicaoMediaAmostral <- function(ID,Y,n,reposicao,B)
+  {
+  MediaAmostral <- matrix(NA,ncol=1,nrow=B)
+for (b in 1:B)
+  {
+  MediaAmostral[b] <- Simulacao(ID,Y,n,reposicao)[[3]] # seleciona o terceiro item da lista
+  }
+return(MediaAmostral=MediaAmostral)
+}
+```
+
+
+```{r,echo=FALSE,message=FALSE}
+selectInput("n","Escolha o tamanho de cada amostra:", choices=c(3,5,10,15,20,25,30,35,40,50,60))
+selectInput("reposicao","Com reposição?", choices=c("sim","nao"))
+selectInput("B","Número de amostras:", choices=c(30,100,1000,2000,3000,6000,10000))
+```
+
+
+```{r,echo=FALSE,message=FALSE}
+renderPlot(hist(DistribuicaoMediaAmostral(ID=Populacao$id,Y=Populacao$Y,n=as.numeric(input$n),reposicao=input$reposicao,B=as.numeric(input$B)),main="Distribuição da Média Amostral",ylab="Frequência", xlab="Média Amostral",col="lightblue"))
+options=list(
+    width="100%", height="100%")
+```
+
+
+
+1. Observe os histogramas obtidos para $B=10000$ simulações para cada caso (combinação de tamanho amostral e tipo de seleção de amostra). O que você nota com relação à distribuição de probabilidade da média amostral conforme o tamanho amostral aumenta. Ela se aproxima de alguma distribuição conhecida? Discuta.
+
+
+
+
+Para resumir todos os casos em uma única tabela, iremos simular 10000 amostras para cada caso: combinação de tamanho amostral e tipo de seleção de amostral (com ou sem reposição). Para cada caso, iremos calcular a média das 10000 médias obtidas e também calculamos a variância amostral das 10000 médias obtidas.
+Vocês irão verificar (produzindo uma tabela com o código abaixo) que a variância amostral teórica é igual $\sigma^2/n$ quando usamos $AAS_c$. No caso $AAS_s$, a variância amostral teórica é $\frac{1}{n}S^2(1-n/N)$. 
+
+
+```{r,echo=FALSE,eval=FALSE}
+casos <- data.frame(n=rep(c(3,5,10,15,20,25,30,35,40,50,60),2),reposicao=c(rep("sim",11),rep("nao",11)))
+
+B=10000
+
+######## 
+# procure sobre os comandos lapply unlist sapply
+# Você deverá produzir um código pra ao final ter um data.frame com nome BB (veja as colunas que ele deve ter abaixo)
+
+
+
+colnames(BB) <- c("Tamanho da Amostra","Reposição?","Média Amostral: Média das 10000 Médias", "Variância Amostral: Variância das 10000 Médias","Variância Amostral Teórica")
+
+#instale o pacote, para isso, retire # do início da linha a seguir, rode uma vez e volte a incluir #
+#install.packages('printr',type = 'source',repos = c('http://yihui.name/xran', 'http://cran.rstudio.com'))
+library(printr)
+BB
+```
+
+2. A variância teórica, no caso em que não conhecemos a população, é possível de ser calculada? Explique. 
+
+3. Qual a utilidade de calcularmos a variância teórica e compararmos com a varância das estimativas obtidas através das simulações? O que podemos aprender, através da variância teórica, sobre a estimativa do parâmetro de interesse? Discuta e coloque no contexto do problema proposto.
+
+
+4. Na prática, coletamos apenas uma amostra e usamos as informações da mesma para calcularmos um intervalo de confiança para $\bar{Y}$, por exemplo. O Teorema Central do Limite exige que o tamanho da amostra seja suficientemente grande. Utilize 10000 simulações em cada cenário (tamanho da amostra e com/sem reposição) para estudar a real cobertura do intervalo de confiança. Produza uma tabela com: Tamanho da Amostra, Reposição, Proporção dos 10000 IC de 95% produzidos que incluem $\bar{Y}$.
+
+
+```{r,echo=FALSE,eval=FALSE}
+casos <- data.frame(n=rep(c(3,5,10,15,20,25,30,35,40,50,60),2),reposicao=c(rep("sim",11),rep("nao",11)))
+
+# Você deverá produzir um código pra ao final ter um data.frame com nome CC (veja as colunas que ele deve ter abaixo).
+# Produza código para obter o vetor Prop
+
+CC <- data.frame(casos,Prop)
+colnames(CC) <- c("Tamanho da Amostra","Reposição?","Proporção")
+
+CC
+```
+
+5. Comente os resultados resumidos através da tabela do item 4.
+
+
