@@ -97,7 +97,7 @@ Os relatórios devem conter informações sobre todos os tópicos listados a seg
 
 ### Formatação dos relatórios
 
-O grupo deverá submeter os relatórios em um arquivo .Rmd, seguindo o modelo de formatação do arquivo **manuscript_template.Rmd**. Copie todos os arquivos da pasta [Template](Template.zip), renomeie e modifique **manuscript_template.Rmd**.
+O grupo deverá submeter os relatórios em um arquivo .Rmd, seguindo o modelo de formatação do arquivo **manuscript_template.Rmd**. Copie todos os arquivos da pasta [Template](./Template.zip), renomeie e modifique **manuscript_template.Rmd**.
 Todos os arquivos necessários para gerar o .pdf a partir do .Rmd deverão ser submetidos.
 
 Importante: ANTES de iniciar um novo .Rmd ou de editar a partir de um .Rmd postado no curso, você deverá alterar a configuração de codificação para UTF-8, caso contrário os caracteres acentuados ficarão desconfigurados.
