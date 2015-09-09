@@ -1,0 +1,23 @@
+# Teste 4
+
+
+Considere uma população com $N=6$ elementos, isto é, $\mathcal{U}=\{1,2,3,4,5,6\}$ com o vetor de características populacionais $\mathbf{D}=(1,4,5,5,6,6)$. Adote um plano $AAS_s$ com $n=2$. Como estimador de $\mu$, considere:
+
+$$ \bar{y}_c = \begin{cases} 
+\bar{y}+1, & \mbox{ se $\mathbf{d}_s$ contém $Y_1$ e não $Y6$}\\
+\bar{y}-1, & \mbox{ se $\mathbf{d}_s$ contém $Y_6$ e não $Y1$} \\
+\bar{y} & \mbox{caso contrário}
+\end{cases}
+$$
+
+
+
+onde $\bar{y}$ é a média amostral e $\mathbf{d}_s$ contém os valores da amostra $\mathbf{s}$.
+
+a. Encontre as distribuições de $\bar{y}$ e $\bar{y}_c$. Verifique se estes estimadores são não viciados para $\mu$.
+
+b. Encontre $Var(\bar{y})$ e $Var(\bar{y}_c)$. Qual o melhor estimador?
+
+
+Fonte: Exercícios 3.5 do livro *Elementos de Amostragem* - Bolfarine \& Bussab.
+

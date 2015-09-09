@@ -1,0 +1,70 @@
+---
+title: "Teste 5"
+subtitle: ME430 - Técnicas de Amostragem
+output: 
+   html_document:
+     keep_md: true
+---
+
+```{r,echo=FALSE}
+set.seed(22015)
+tmp <- sort(sample(40:200,3))
+N_A <- tmp[3]
+N_B <- tmp[2]
+N_C <- tmp[1]
+
+nA <- sample(7:min(N_A,20),1)
+nB <- sample(7:min(N_B,20),1)
+nC <- sample(7:min(N_C,20),1)
+
+A <- round(abs(rnorm(nA,mean=33,sd=5)),0)
+
+B <- round(abs(rnorm(nB,mean=25,sd=15)),0)
+
+C <- round(abs(rnorm(nC,mean=19,sd=10)),0)
+```
+
+Uma firma de marketing está interessada no potencial para um comercial na TV e decide conduzir uma pesquisa para estimar o número médio de horas gastas assistindo TV por domicílio por semana em uma certa região. A região é dividida em 3 áreas: A, B e C. 
+
+* Área A está localizada ao redor de uma fábrica e a maioria dos moradores dos domicílios é funcionário desta fábrica e tem filhos em idade escolar.
+
+* Área B contém na maioria aposentados.
+
+* Área C contém na maioria fazendeiros.
+
+A área A contém `r N_A` domicílios, a área B contém `r N_B` e a área C contém `r N_C`.
+
+A firma decide coletar informação de `r nA` domicílios da área A, `r nB` da área B e `r nC` da área C usando um plano amostral $AAS_s$ em cada área.
+
+Dados coletados:
+
+* área A: `r A`.
+
+* área B: `r B`.
+
+* área C: `r C`.
+
+```{r,echo=FALSE}
+xbar <- sapply(list(A=A,B=B,C=C),function(x) round(mean(x),2))
+sdd <- sapply(list(A=A,B=B,C=C),function(x) round(sd(x),2))
+aa<- data.frame(Xbar=xbar,SDD=sdd)
+aa <- t(aa)
+rownames(aa) <- c("Média Amostral","Desvio-padrão Amostral")
+library(knitr)
+kable(aa)
+```
+
+1. Encontre uma estimativa para a média de horas assistindo TV por domicílio na região. Estime a variância desta estimativa. 
+
+2. Encontre uma estimativa para o total de horas assistindo TV por domicílio na região. Estime a variância desta estimativa.  
+
+3. Encontre um intervalo de confiança para a média de horas assistindo TV por domicílio na região.
+
+4. Encontre um intervalo de confiança para o total de horas assistindo TV por domicílio na região.
+
+5. Suponha que antes de iniciar a amostragem, a firma tenha conduzido um levantamento anterior e estimou-se que $\sigma_1=5$, $\sigma_2=15$, $\sigma_3=10$. Se o custo de obter um observação é o mesmo em cada área (entrevistas feitas por telefone), então qual seria uma alocação ótima para $n=`r nA+nB+nC`$?
+
+6. Calcule a variância para a estimativa da média de horas assistindo TV por domicílio na região caso a firma utilizasse a alocação ótima descrita no item anterior.
+
+7. Compare a variância obtida no item anterior com a variância estimada obtida no item 1.
+
