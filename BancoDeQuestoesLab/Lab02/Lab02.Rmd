@@ -1,0 +1,107 @@
+---
+title: "Laboratório 2"
+subtitle: ME430
+author: seu nome
+output: html_document
+---
+
+
+ A tabela a seguir apresenta uma população de cinco hospitais. O número total de leitos por hospital está apresentado na tabela.
+
+
+```{r, echo=FALSE}
+set.seed(#SEU_RA_AQUI) 
+data <- data.frame(Hospital=c("A","B","C","D","E"),Leitos=sample(100:1000,5))
+library(knitr)
+kable(data)
+```
+
+
+* Calcule a média e a variância da distribuição do número de leitos na população.
+
+```{r, echo=FALSE,results='hide'}
+N= # 
+mu= # 
+sigma2= # 
+```
+
+A média de leitos ($\mu$) é `r mu` e a variância ($\sigma^2$) é `r sigma2`.
+
+
+* Quantas amostras diferentes de 2 hospitais podem ser sorteadas desta população de 5 hospitais, sem reposição?
+
+```{r, echo=FALSE,results='hide'}
+n=2
+amostrasDif <- # total de amostras possiveis
+```
+
+`r amostrasDif` amostras diferentes de 2 hospitais podem ser sorteadas desta população.
+ 
+* Liste todas as amostras do item anterior e calcule a média amostral para cada amostra.
+
+```{r, echo=FALSE,message=FALSE}
+```{r, echo=FALSE,message=FALSE}
+library(combinat)
+amostras <- combn(1:N,n)
+hospitalAmostra <- # coluna 1 indica o primeiro hospital sorteado, coluna 2 indica o segundo hospital sorteado
+ybar <- # media de cada amostra
+prob <-  # prob de cada amostra ocorrer
+distybar <- data.frame(hospitalAmostra,ybar,prob)
+kable(distybar,col.names=c("Hospital Amostrado 1","Hospital Amostrado 2", "Número médio de Leitos","Probabilidade"))
+```
+
+
+* Assumindo que cada amostra do item anterior tem a mesma probabilidade de ocorrer, calcule a esperança e a variância da distribuição da média amostral (a partir da distribuição de probabilidade obtida).
+
+```{r, echo=FALSE, results='hide',include=FALSE}
+espybarra <- # esperança da media amostral
+
+varybarra <- # variancia da media amostral
+
+
+```
+
+A esperança da média amostral é `r espybarra` e a variância da média amostral é `r varybarra`.
+
+
+* Calcule o erro padrão da média. Como esse valor se compara ao desvio padrão populacional?
+
+```{r, echo=FALSE, results='hide',include=FALSE}
+erropadrao <- #
+sigma <- # desvio padrao pop
+```
+
+O erro padrão da média amostral é `r erropadrao`. O desvio padrão populacional ($\sigma$) é `r sigma`.
+
+
+* Quantas amostras diferentes de 4 hospitais podem ser sorteadas desta população de 5 hospitais, sem reposição? Liste todas as amostras e calcule a média amostral para cada uma.
+
+```{r, echo=FALSE,message=FALSE}
+n <- 4
+amostras <- combn(1:N,n)
+amostrasDif <- #
+ybar <- #
+prob <- # prob de cada amostra ocorrer
+hospitalAmostra <- # coluna 1 indica o primeiro hospital sorteado, coluna 2 indica o segundo hospital sorteado, etc...
+distybar <- data.frame(hospitalAmostra,ybar,prob)
+kable(distybar,col.names=c("Hospital Amostrado 1","Hospital Amostrado 2","Hospital Amostrado 3","Hospital Amostrado 4", "Número médio de Leitos","Probabilidade"))
+```
+
+`r amostrasDif` amostras diferentes de 2 hospitais podem ser sorteadas desta população.
+
+*  Assumindo que cada amostra do item anterior tem a mesma probabilidade de ocorrer, calcule a esperança e a variância da distribuição da média amostral. Como a esperança e a variância se comparam com os valores do plano amostral sem reposição de tamanho 2?
+
+
+```{r, echo=FALSE, results='hide',include=FALSE}
+espybarra <- #
+
+varybarra <- #
+
+
+```
+
+A esperança da média amostral é `r espybarra` e a variância da média amostral é `r varybarra`.
+
+
+
+
