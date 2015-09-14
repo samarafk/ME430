@@ -79,7 +79,6 @@ O erro padrão da média amostral é `r erropadrao`. O desvio padrão populacion
 ```{r, echo=FALSE,message=FALSE}
 n <- 4
 amostras <- combn(1:N,n)
-amostrasDif <- #
 ybar <- #
 prob <- # prob de cada amostra ocorrer
 hospitalAmostra <- # coluna 1 indica o primeiro hospital sorteado, coluna 2 indica o segundo hospital sorteado, etc...
