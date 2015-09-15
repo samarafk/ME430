@@ -146,7 +146,7 @@ casos <- data.frame(n=rep(c(3,5,10,15,20,25,30,35,40,50,60),2),reposicao=c(rep("
 B=10000
 
 ######## 
-# procure sobre os comandos lapply unlist sapply
+# procure sobre os comandos apply
 # Você deverá produzir um código pra ao final ter um data.frame com nome BB (veja as colunas que ele deve ter abaixo)
 
 
