@@ -6,7 +6,37 @@ output:
      keep_md: true
 ---
 
-### Exercício 1
+
+## Exercício 1
+
+```{r,echo=FALSE}
+set.seed(2015)
+
+N <- 300000
+
+Nd <- 180000
+
+ValorTot <- 10000
+
+c1 <- .2
+
+c2 <- .8
+```
+
+Uma fábriaca tem `r format(N,scientific=FALSE)` relatórios de acidentes de trabalho e um levantamento está sendo feito para estimar o número médio de dias de trabalho perdidos por causa de acidentes.
+
+Dos `r format(N,scientific=FALSE)` relatórios, `r format(Nd,scientific=FALSE)` estão armazenados digitalmente e já totalmente codificados e os demais estão em formulários em papel. 
+
+Um orçamento foi feito e há `r format(ValorTot,scientific=FALSE)` reais disponíveis para realizar este levantamento.
+
+A consultoria que fará o levantamento indicou que o custo por amostra dentre os relatórios já codificados é de $R$$ `r c1` e dentre os relatórios não codificados é de $R$$ `r c2`.
+
+Qual a melhor maneira de alocar os elementos da amostra entre os relatórios codificados e não codificados?
+
+
+
+
+### Exercício 2
 
 ```{r,echo=FALSE}
 
@@ -42,7 +72,8 @@ kable(pop,col.names = c("h","$N_h$","$mu_h$","$S_h^2$"))
 5. Compare as variâncias dos estimadores para $\mu$ obtidos com a $AAS_c$ e com $AE$ com alocação ótima de Neyman.
 
 
-
-
 Fonte: Exercícios 4.1 do livro *Elementos de Amostragem* - Bolfarine \& Bussab.
+
+
+
 
