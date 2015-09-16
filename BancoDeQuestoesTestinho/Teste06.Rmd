@@ -1,0 +1,48 @@
+---
+title: "Teste 6"
+subtitle: ME430 - Técnicas de Amostragem
+output: 
+   html_document:
+     keep_md: true
+---
+
+### Exercício 1
+
+```{r,echo=FALSE}
+
+set.seed(2015)
+H=5
+
+Nh <- sort(sample(40:150,H))
+
+muh <- round(c(rnorm(1,mean=7,sd=1),rnorm(1,mean=7,sd=sqrt(2)),rnorm(1,mean=11,sd=1),rnorm(1,mean=9,sd=sqrt(2)),rnorm(1,mean=10,sd=sqrt(2))),2)
+
+Sh2 <- round(rchisq(H,1),2)
+
+pop <- data.frame(h=1:H,Nh=Nh,muh=muh,Sh2=Sh2)
+
+n <- sample(60:floor(sum(Nh)/3),1)
+```
+
+Uma população está dividida em 5 estratos. Os tamanhos dos estratos, médias ($\mu_h$) e variâncias ($S_h^2$) são dados na tabela abaixo.
+
+```{r,echo=FALSE}
+library(knitr)
+kable(pop,col.names = c("h","$N_h$","$mu_h$","$S_h^2$"))
+```
+
+1. Calcule $\mu$ e $\sigma^2$ para esta população.
+
+2. Para uma amostra de tamanho `r n`, determine a alocação proporcional.
+
+3. Para uma amostra de tamanho `r n`, determine a alocação ótima de Neyman.
+
+4. Compare as variâncias dos estimadores para $\mu$ obtidos com a $AAS_c$ e com $AE$ com alocação proporcional.
+
+5. Compare as variâncias dos estimadores para $\mu$ obtidos com a $AAS_c$ e com $AE$ com alocação ótima de Neyman.
+
+
+
+
+Fonte: Exercícios 4.1 do livro *Elementos de Amostragem* - Bolfarine \& Bussab.
+
