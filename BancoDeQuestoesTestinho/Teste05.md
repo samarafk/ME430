@@ -38,7 +38,7 @@ Desvio-padrão Amostral     4.94   15.03    7.25
 
 5. Suponha que antes de iniciar a amostragem, a firma tenha conduzido um levantamento anterior e estimou-se que $\sigma_1=5$, $\sigma_2=15$, $\sigma_3=10$. Se o custo de obter um observação é o mesmo em cada área (entrevistas feitas por telefone), então qual seria uma alocação ótima para $n=40$?
 
-6. Calcule a variância para a estimativa da média de horas assistindo TV por domicílio na região caso a firma utilizasse a alocação ótima descrita no item anterior.
+6. Calcule a variância estimada para a estimativa da média de horas assistindo TV por domicílio na região caso a firma utilizasse a alocação ótima descrita no item anterior.
 
 7. Compare a variância obtida no item anterior com a variância estimada obtida no item 1.
 
