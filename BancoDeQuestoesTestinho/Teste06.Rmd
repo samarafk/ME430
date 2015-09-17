@@ -23,7 +23,7 @@ c1 <- .2
 c2 <- .8
 ```
 
-Uma fábriaca tem `r format(N,scientific=FALSE)` relatórios de acidentes de trabalho e um levantamento está sendo feito para estimar o número médio de dias de trabalho perdidos por causa de acidentes.
+Uma fábrica tem `r format(N,scientific=FALSE)` relatórios de acidentes de trabalho e um levantamento está sendo feito para estimar o número médio de dias de trabalho perdidos por causa de acidentes.
 
 Dos `r format(N,scientific=FALSE)` relatórios, `r format(Nd,scientific=FALSE)` estão armazenados digitalmente e já totalmente codificados e os demais estão em formulários em papel. 
 

@@ -5,7 +5,7 @@
 
 
 
-Uma fábriaca tem 300000 relatórios de acidentes de trabalho e um levantamento está sendo feito para estimar o número médio de dias de trabalho perdidos por causa de acidentes.
+Uma fábrica tem 300000 relatórios de acidentes de trabalho e um levantamento está sendo feito para estimar o número médio de dias de trabalho perdidos por causa de acidentes.
 
 Dos 300000 relatórios, 180000 estão armazenados digitalmente e já totalmente codificados e os demais estão em formulários em papel. 
 
