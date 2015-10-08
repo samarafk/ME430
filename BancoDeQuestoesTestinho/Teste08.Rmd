@@ -1,0 +1,116 @@
+---
+title: "Teste 8"
+subtitle: ME430 - Técnicas de Amostragem
+output: 
+   html_document:
+     keep_md: true
+---
+
+
+## Exercício 1
+
+```{r,echo=FALSE}
+
+area <- 1:10
+
+muX <- 19.7
+
+ArvoresAproX <- c(23,14,20,25,12,18,30,27,8,31)
+
+ArvoresY <- ceiling(1*ArvoresAproX+rnorm(10,0,2))
+
+r <- round(mean(ArvoresY),2)/round(mean(ArvoresAproX),2)
+
+```
+
+Para estimar o número médio de árvores por acre em uma plantação com 1000-acres, o investigador usa uma $AAS_s$ de 10 áreas com 1 acre cada e conta o número de árvores ($y$) em cada área. O investigador também tem fotos aéreas da plantação, a partir das quais ela pode obter o número de árvores aproximado ($x$) por acre para a plantação toda. Portanto, o investigador sabe que $\mu_x=19.7$. Como as duas variáveis, $x$ e $y$, são aproximadamente proporcionais e, além disso, se uma variável é 0 a outra também será, o investigador deseja usar estimadores do tipo razão. A seguir estão os dados coletados, $x$ e $y$ e o cálculo da variável: $y-rx$, onde $r$ é a estimativa de $R=\mu_y/\mu_x$.
+
+```{r,echo=FALSE}
+library(printr)
+
+data <- cbind(Area=area,y=ArvoresY,x=ArvoresAproX,"y-rx"=ArvoresY-r*ArvoresAproX)
+rownames(data) <- NULL
+data
+```
+
+Para facilitar os cálculos, você pode usar a seguinte informação:
+
+```{r,echo=FALSE}
+
+variancia <- apply(data[,-1],2,function(x) round(var(x),2))
+
+media <- apply(data[,-1],2,function(x) round(mean(x),2))
+
+summ <- rbind(media,variancia)
+
+summ
+
+```
+
+
+1. Estime o número médio de árvores por acre na plantação usando a média amostral. Estime a variância da estimativa.
+
+2. Estime o número médio de árvores por acre na plantação usando estimador do tipo razão. Estime a variância da estimativa.
+
+3.  Estime o número total de árvores na plantação usando estimador do tipo razão. Estime a variância da estimativa.
+
+4. Encontre o tamanho amostral necessário para que a diferença entre o número médio de árvores por acre na população e a respectiva estimativa usando o estimador de razão não exceda 1 com 95\% de confiança. Para os cálculos, assuma por um instante que $S_R^2=s_R^2$. Atente-se para o fato de que o plano amostral é $AAS_s$.
+
+
+## Exercício 2
+
+
+
+```{r,echo=FALSE,message=FALSE}
+set.seed(2015)
+N <- sample(seq(200,400,10),1)
+
+
+pessegueiro <- 1:10
+Y <- c(30,21,25,29,34,22,19,28,35,26)
+X <- c(30,24,26,30,34,24,22,29,38,29)
+
+r <- mean(Y)/mean(X)
+
+data <- cbind(Pessegueiro=pessegueiro,y=Y,x=X,"y-rx"=Y-r*X)
+
+```
+
+
+Um fazendeiro fez uma avaliação grosseira da produção $x_i$, em kg, de cada um de seus $N=`r N`$ pessegueiros. A peso total foi $5800$ kg segundo a avaliação grosseira do fazendeiro. Tomou-se uma $AAS_s$ de 10 pessegueiros, colheram-se os pêssegos e pesou-se a produção $y_i$. Os resultados estão abaixo. Para facilitar os cálculos, os resultados da variável $y-rx$ estão incluídos.
+
+```{r,echo=FALSE}
+data
+```
+
+$$\sum_{i=1}^nx_i=`r sum(X)`$$
+
+$$\sum_{i=1}^ny_i=`r sum(Y)`$$
+
+$$\sum_{i=1}^nx_iy_i= `r sum(X*Y)`$$
+
+$$\sum_{i=1}^nx_i^2= `r sum(X*X)`$$
+
+$$\sum_{i=1}^ny_i^2= `r sum(Y*Y)`$$
+
+$$\hat{\rho}(x,y)=`r cor(X,Y)`$$
+
+```{r,echo=FALSE}
+
+variancia <- apply(data[,-1],2,function(x) round(var(x),2))
+
+media <- apply(data[,-1],2,function(x) round(mean(x),2))
+
+summ <- rbind(media,variancia)
+
+summ
+```
+
+1. Estime o total da produção usando $N\bar{y}$. Estime a variância da estimativa.
+
+2. Estime o total da produção usando estimador do tipo razão. Estime a variância da estimativa.
+
+3. Estime o total da produção usando estimador do tipo regressão. Estime a variância da estimativa.
+
+
+Fonte: Baseado no Exercício 6.3 do livro *Elementos de Amostragem* - Bolfarine \& Bussab.
