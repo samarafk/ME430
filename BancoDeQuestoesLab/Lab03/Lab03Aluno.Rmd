@@ -1,0 +1,250 @@
+---
+title: "Laboratório 3"
+subtitle: ME430
+author: seu nome
+output: html_document
+---
+
+Thomas Lumley desenvolveu o pacote **survey** para técnicas de amostragem no R. Tutoriais podem ser encontrados no site [http://faculty.washington.edu/tlumley/survey](http://faculty.washington.edu/tlumley/survey) e também no livro [*Complex Surveys: A guide to analysis using R*](http://dx.doi.org/10.1002/9780470580066).
+
+
+No laboratório de hoje vamos ver exemplos de como analizar uma amostra retirada de uma população simulada usando tanto **amostragem aleatória simples** quanto **amostragem aleatória estratificada**.
+
+
+
+Para criar a população simulada, use os seguintes comandos:
+
+
+```{r,eval=FALSE}
+set.seed(#SEURA)
+N1 <- 500
+N2 <- 500
+N <- N1+N2
+mu1 <- 0
+mu2 <- 5
+y <- c(rnorm(N1,mean=mu1),rnorm(N2,mean=mu2))
+x <- y + rnorm(N)
+grupo <- c(rep("a",N1),rep("b",N2))
+pop <- data.frame(grupo,x,y)
+```
+
+
+Na população há 1000 unidades com 3 variáveis coletadas: $x$, $y$ e *grupo*. 
+
+A característica de interesse é $y$: queremos uma estimativa para a média e o total populacionais de $y$. 
+
+A variável $y$ possui `r N1` observações com média `r mu1` pertencentes ao grupo "a" e outras `r N2` observações com média `r mu2` pertencentes ao grupo "b". A variável *grupo* será usada na amostragem estratificada. 
+
+A variável $x$ é uma versão menos precisa da variável $y$ e será usada como variável auxiliar para ilustrar o uso de estimadores do tipo razão.
+
+#### 1) Faça um gráfico dos dados populacionais.
+
+
+```{r,echo=FALSE,fig.height=5,fig.width=5,eval=FALSE}
+
+#coloque sua figura aqui
+
+```
+
+
+
+
+
+Vamos coletar uma $AAS_s$ e uma $AE$, ambas de tamanho $100$. No caso da $AE$, usaremos alocação proporcional. Use os comandos a seguir.
+
+```{r,eval=FALSE}
+AASelementos <- sample(N,100,replace=FALSE) 
+AmostraAAS <- pop[AASelementos,]
+AEelementos <- c(sample(N1,50,replace=FALSE),sample((N1+1):N,50,replace=FALSE))
+AmostraAE <- pop[AEelementos,]
+```
+
+
+
+Se estivéssemos usando dados reais (não simulados), a única informação que teríamos disponível seria a amostra coletada. 
+
+No caso, dependendo do plano amostral escolhido, teríamos disponível: **AmostraAAS** ou **AmostraAE**. 
+
+Poderíamos ter acesso, também, a algumas informações da variável $x$ (mais barata) como: total populacional, número de elementos em cada estrato, etc.
+
+
+
+### Amostra Aleatória Simples
+
+
+Usaremos primeiro os dados coletados usando uma $AAS_s$: **AmostraAAS**, portanto vamos ignorar a variável *grupo*. 
+
+Iremos usar o pacote **survey**. Precisamos, primeiramente, passar algumas informações sobre o plano amostral, antes de calcularmos estimativas.
+
+Primeiro, adicionamos uma variável em **AmostraAAS**: *fpc.aas*, que indica o tamanho da população ($N$). Esta informação é necessária, pois, no caso de $AAS_s$,  temos sempre um fator de correção quando calculamos variância: $(1-f)$, onde $f=n/N$.
+
+Depois, criamos um objeto, **svydesign**, para descrever nosso plano amostral. O primeiro argumento, **id**, indica como as unidades elementares estão estruturadas, ou seja, se amostragem por conglomerados foi usada. No caso de $AAS_s$, usamos apenas **1** no argumento **id**. Outro argumento é **fpc**, ``finite population corretion'', onde indicamos o tamanho da população, de maneira que $(1-f)$ possa ser calculado para a variância. O argumento **data** indica qual o conjunto de dados contém informações necessárias do plano amostral. No caso, não precisamos indicar o tamanho de amostra, $n$, no comando **svydesign**, pois ele já saberá isso avaliando o número de linhas do conjunto de dados indicado em **data**. Para verificar a probabilidade de cada elemento na amostra: **plano.aas\$allprob**. Para ver mais detalhes, digite **?svydesign** e **str(plano.aas)**.
+
+Os comandos a seguir definem o plano amostral $AAS_s$:
+
+```{r,message=FALSE,eval=FALSE}
+library(survey)
+AmostraAAS$fpc.aas <- N
+plano.aas <- svydesign(id=~1,data=AmostraAAS,fpc=~fpc.aas)
+```
+
+
+
+Com o plano amostral devidamente definido no R, podemos então calcular estimativas para parâmetros de interesse.
+
+Vamos estimar o total populacional de $y$, $\tau_y$ e a média populacional, $\mu_y$, usando nossa amostra. 
+
+Podemos fornecer também um intervalo de confiança para estas estimativas.
+
+```{r,eval=FALSE}
+estTau <- svytotal(~y,design=plano.aas)
+estTau
+confint(estTau)
+estMu <- svymean(~y,design=plano.aas)
+estMu
+confint(estMu)
+```
+
+
+
+Como temos disponível informação sobre $x$, vamos usar o estimador de razão. Vamos primeiramente estimar $R=\frac{\mu_y}{\mu_x}$ usando $r=\frac{\bar{y}}{\bar{x}}$. Depois vamos calcular $\hat{\mu}_y=r\mu_x$ e $\hat{\tau}_y=r\tau_x$.
+
+
+```{r,eval=FALSE}
+muX <- mean(pop$x)
+tauX <- sum(pop$x)
+r <- svyratio(numerator=~y,denominator=~x,design=plano.aas)
+r
+confint(r)
+estMuR <- svyratio(numerator=~I(y*muX),denominator=~x, plano.aas)
+estMuR
+confint(estMuR)
+estTauR <- svyratio(numerator=~I(y*tauX),denominator=~x, plano.aas)
+estTauR
+confint(estTauR)
+```
+
+
+### Amostra Aleatória Estratificada
+
+
+
+Consideremos agora os dados coletados usando a $AE$: **AmostraAE**. Lembre que a estratificação foi realizada usando a variável **grupo**. 
+
+Precisamos, primeiramente, passar algumas informações sobre o plano amostral, antes de calcularmos estimativas.
+
+
+Primeiro, adicionamos uma variável em **AmostraAE**: *fpc.ae*, que indica o tamanho dos estratos ($N_h$). Esta informação é necessária, pois, no caso de $AE$ com $AAS_s$ dentro dos estratos,  temos sempre um fator de correçãoo quando calculamos a variância dentro de cada estrato: $(1-f_h)$, onde $f_h=n_h/N_h$.
+
+Depois, criamos novamente um objeto, **svydesign**, para descrever nosso plano amostral. Os argumentos são os mesmos do exemplo anterior, mas precisamos adicionar o argumento **strata**, para indicar de qual estrato pertence a unidade elementar da amostra.
+
+
+```{r,eval=FALSE}
+AmostraAE$fpc.ae <- 500
+plano.ae <- svydesign(id=~1,strata=~grupo,data=AmostraAE,fpc=~fpc.ae)
+```
+
+
+
+Com o plano amostral devidamente definido no R, podemos então calcular estimativas para parâmetros de interesse.
+
+```{r,eval=FALSE}
+estTau <- svytotal(~y,design=plano.ae)
+estTau
+confint(estTau)
+estMu <- svymean(~y,design=plano.ae)
+estMu
+confint(estMu)
+```
+
+
+
+Como temos disponível informação sobre $x$, vamos usar o estimador de razão. Vamos primeiramente estimar $R=\frac{\mu_y}{\mu_x}$ usando $r=\frac{\bar{y}}{\bar{x}}$. Depois vamos calcular $\hat{\mu}_y=r\mu_x$ e $\hat{\tau}_y=r\tau_x$.
+
+```{r,eval=FALSE}
+r <- svyratio(numerator=~y,denominator=~x,design=plano.ae)
+r
+confint(r)
+estMuR <- svyratio(numerator=~I(y*muX),denominator=~x, plano.ae)
+estMuR
+confint(estMuR)
+estTauR <- svyratio(numerator=~I(y*tauX),denominator=~x, plano.ae)
+estTauR
+confint(estTauR)
+```
+
+#### 2) Compare e discuta sobre o ganho/perda em eficiência ao utilizar estimadores de razão, em comparação com os estimadores usuais ($\bar{y}$ e $N\bar{y}$), quando usamos os planos amostrais $AAS$ e $AE$.
+
+
+#### 3) Resolva o exercício a seguir usando  os comandos vistos neste laboratório.
+
+Deseja-se fazer um levantamento para estimar a quantidade média de dinheiro (somente em moedas) por aluno em uma sala de aula com $N=53$ alunos. Primeiro, pediu-se para cada aluno $i$ escrever o quanto ele achava que tinha em moedas: $x_i$. Esta informação foi coletada para todos os 53 alunos na sala. A média desses valores foi $\mu_x=R\$3,33$. Então, uma $AAS_s$ de tamanho $n=10$ foi realizada e contou-se então o valor exato em moedas para o aluno $i$: $y_i$.
+
+Quantidade exata ($y$): 8.75, 2.55, 9, 1.10, 7.50, 5, 1.15, 3.40, 2, 1.25
+
+Quantidade "advinhada" ($x$): 8.35, 1.50, 10, 0.60, 7.50, 7.95, 0.95, 4.40, 1, 0.50
+
+
+Usando estimadores vistos no capítulo 3, forneça:
+
+**a.** Estimativa, erro padrão e intervalo de confiança para a quantidade média de dinheiro por aluno na sala.
+
+**b.** Estimativa, erro padrão e intervalo de confiança para o total de dinheiro entre os alunos da sala.
+
+
+Usando estimadores de tipo razão e as funções do pacote **survey**, forneça:
+
+
+**a.** Estimativa, erro padrão e intervalo de confiança para a quantidade média de dinheiro por aluno na sala.
+
+**b.** Estimativa, erro padrão e intervalo de confiança para o total de dinheiro entre os alunos da sala.
+
+
+A seguir você encontra uma função, **razao.ass** para calcular estimadores do tipo razão. Leia o código com atenção e responda às perguntas a seguir.
+
+```{r,eval=FALSE}
+# Função para calcular o estimador de razão, y é a variavel de interesse e x é auxiliar
+
+# alpha = nivel de significancia
+# ajuste = indica se o ajuste na variancia sugerido pro Cochran 1977 pag 155 deve ser usado
+razao.aas <- function(x, y, opt="R", muX=NA,tauX=NA, N=NA,replace=TRUE,alpha=0.05,normal=TRUE,ajuste=FALSE)
+    {
+        # opt = "Tau" para o total populacional de Y
+        # opt = "Mu"  para a media populacional de Y
+        n <- length(x)
+        if (isTRUE(replace)) {fpc <- 1} else {fpc <- 1-(n/N)}
+        ratio <- sum(y)/sum(x)
+        if (!is.na(muX)) {meanX <- muX}
+        else if(!is.na(tauX) & !is.na(N)) {meanX <- tauX/N}
+        else {meanX <- mean(x)}
+        correcao <- (meanX/mean(x))^2
+        if (isTRUE(ajuste)) {
+            var.r <- (correcao*fpc*(1/meanX^2)*sum((y-ratio*x)^2))/(n*(n-1))}
+        else var.r <- (fpc*(1/meanX^2)*sum((y-ratio*x)^2))/(n*(n-1))
+        switch(opt,
+               "R" = {theta <- ratio
+                      var.theta <- var.r},
+               "Tau" = {theta <- ratio*tauX
+                        var.theta <- var.r*tauX^2},
+               "Mu" = {theta <- ratio*meanX
+                       var.theta <- var.r*meanX^2}
+               )
+        if (isTRUE(normal)) {margem <- qnorm(1-alpha/2)*sqrt(var.theta)}
+        else {margem <- qt(1-alpha/2,n-1)*sqrt(var.theta)}
+        ep.theta=sqrt(var.theta)
+        li=theta-margem
+        ls=theta+margem
+        return(list(estimativa=theta,variancia=var.theta,erropadrao=ep.theta,liminf=li,limsup=ls))
+    }
+```
+
+
+Usando estimadores de tipo razão e a função do arquivo **razao.ass.R**, forneça:
+
+
+**a.** Estimativa, erro padrão e intervalo de confiança para a quantidade média de dinheiro por aluno na sala.
+
+**b.** Estimativa, erro padrão e intervalo de confiança para o total de dinheiro entre os alunos da sala.
+
+
+Importante: verifique que seu relatório fornece respostas corretas mesmo quando o número no comando **set.seed** for mudado.
