@@ -39,7 +39,7 @@ A tabela a seguir apresenta os dados para toda a população:
 Considere a população $\mathcal{U}$:
 
 
-  X    Y
+  Y    X
 ---  ---
   9    1
  42    4
