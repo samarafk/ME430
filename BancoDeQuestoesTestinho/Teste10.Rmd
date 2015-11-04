@@ -1,0 +1,55 @@
+---
+title: "Teste 10"
+subtitle: ME430 - Técnicas de Amostragem
+output: 
+   html_document:
+     keep_md: true
+---
+
+
+
+```{r,echo=FALSE}
+set.seed(2015)
+N=sample(6000:8000,1)
+A=sample(100:150,1)
+a=10
+
+Balpha=sample(50:70,a)
+balpha=ceiling(Balpha*.20)
+
+funcionario <- c()
+restaurante <- c()
+fpcF <- c()
+
+for (i in 1:a)
+    {
+        funcionario <- append(funcionario,1:balpha[i])
+        restaurante <- append(restaurante,rep(i,balpha[i]))
+        fpcF <- append(fpcF,rep(Balpha[i],balpha[i]))
+    }
+
+
+satisfacao <- lapply(1:a,function(x) sample(4:7,balpha[x],replace=TRUE))
+
+dataAmostra <- data.frame(restaurante=restaurante,funcionario=funcionario, satisfacao=unlist(satisfacao))
+
+datatmp <- data.frame(Restaurante=1:a,Balpha=Balpha,balpha=balpha)
+```
+
+
+Uma rede de restaurantes quer estimar a média da satisfação dos funcionários (a nota vai de 1 a 7). A rede tem `r A` restaurantes e `r N` funcionários. Uma $AAS_s$ de `r a` restaurantes foi coletada. Para cada restaurante sorteado, coletou-se uma AASs de cerca de 20% dos funcionários para serem entrevistados. Os dados estão a seguir. Estime a nota média de satisfação dos `r N` funcionários e a variância da sua estimativa.
+
+| Restaurante Amostrado          | Total de funcionários| Funcionários amostrados| Satisfação |
+|-------------------------------:|---------------------:|-----------------------:|-----------:|
+| 1                              | `r Balpha[1]`        | `r balpha[1]`          | `r satisfacao[[1]]` |
+| 2                              | `r Balpha[2]`        | `r balpha[2]`          | `r satisfacao[[2]]` |
+| 3                              | `r Balpha[3]`        | `r balpha[3]`          | `r satisfacao[[3]]` |
+| 4                              | `r Balpha[4]`        | `r balpha[4]`          | `r satisfacao[[4]]` |
+| 5                              | `r Balpha[5]`        | `r balpha[5]`          | `r satisfacao[[5]]` |
+| 6                              | `r Balpha[6]`        | `r balpha[6]`          | `r satisfacao[[6]]` |
+| 7                              | `r Balpha[7]`        | `r balpha[7]`          | `r satisfacao[[7]]` |
+| 8                              | `r Balpha[8]`        | `r balpha[8]`          | `r satisfacao[[8]]` |
+| 9                              | `r Balpha[9]`        | `r balpha[9]`          | `r satisfacao[[9]]` |
+| 10                             | `r Balpha[10]`       | `r balpha[10]`         | `r satisfacao[[10]]`|
+
+
