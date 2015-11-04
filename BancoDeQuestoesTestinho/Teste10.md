@@ -5,7 +5,7 @@
 
 
 
-Uma rede de restaurantes quer estimar a média da satisfação dos funcionários (a nota vai de 1 a 7). A rede tem 142 restaurantes e 6122 funcionários. Uma $AAS_s$ de 10 restaurantes foi coletada. Para cada restaurante sorteado, coletou-se uma AASs de cerca de 20% dos funcionários para serem entrevistados. Os dados estão a seguir. Estime a nota média de satisfação dos 6122 funcionários e a variância da sua estimativa.
+Uma rede de restaurantes quer estimar a média da satisfação dos funcionários (a nota vai de 1 a 7). A rede tem 142 restaurantes e 6122 funcionários. Uma $AAS_s$ de 10 restaurantes foi coletada. Para cada restaurante sorteado, coletou-se uma $AAS_s$ de cerca de 20% dos funcionários para serem entrevistados. Os dados estão a seguir. Estime a nota média de satisfação dos 6122 funcionários e a variância da sua estimativa.
 
 | Restaurante Amostrado          | Total de funcionários| Funcionários amostrados| Satisfação |
 |-------------------------------:|---------------------:|-----------------------:|-----------:|
