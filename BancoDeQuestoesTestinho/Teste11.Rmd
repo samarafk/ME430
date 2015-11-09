@@ -1,0 +1,46 @@
+---
+title: "Teste 11"
+subtitle: ME430 - Técnicas de Amostragem
+output: 
+   html_document:
+     keep_md: true
+---
+
+
+```{r,echo=FALSE}
+
+data <- data.frame(Conglomerado=1:25,Balpha=c(8,12,4,5,6,6,7,5,8,3,2,6,5,10,9,3,6,5,5,4,6,8,7,3,8),
+                   TauAlpha=c(4,6,1,3,3,4,4,2,3,2,1,3,2,4,4,1,4,2,3,1,3,3,4,0,3))
+
+
+sum_na <- sum(data$Balpha)
+sum_Ta <- sum(data$TauAlpha)
+sum_na2 <- sum(data$Balpha^2)
+sum_Ta2 <- sum(data$TauAlpha^2)
+sum_Tana <- sum(data$TauAlpha*data$Balpha)
+```
+
+
+Um sociólogo deseja estimar a proporção de residentes em uma certa cidade que vivem em residência alugada. Nenhum cadastro de adultos residentes está disponível. 
+A cidade está dividida em quadras retangulares, exceto em duas áreas industriais e em três parques, com poucas casas. O sociólogo decide que cada quadra será um conglomerado, as duas áreas industriais formarão um outro conglomerado e os três parques mais um outro conglomerado. Os conglomerados são numerados de 1 a 415 sobre um mapa da cidade. Há tempo e verba suficiente para pesquisar `r dim(data)[1]` conglomerados e visitar todas as residências dentro de cada conglomerado da amostra. Com uma tabela de números aleatórios são selecionados `r dim(data)[1]` conglomerados identificados no mapa, usando AASc. Entrevistadores são enviados para os conglomerados selecionados e os dados sobre  são apresentados na tabela a seguir:
+
+
+
+
+```{r,echo=FALSE}
+library(knitr)
+data1 <- data
+colnames(data1) <- c("Conglomerado Amostrado","$n_{\\alpha}$","$T_{\\alpha}$")
+kable(data1)
+```
+
+
+
+  $n_{\alpha}$: número de residentes no conglomerado $\alpha$.
+   
+   $T_{\alpha}$: número de residentes em residência alugada no conglomerado $\alpha$.
+   
+  Cálculos disponíveis: $\sum_{\alpha=1}^{25}n_{\alpha}=`r sum_na`$, $\sum_{\alpha=1}^{25}T_{\alpha}=`r sum_Ta`$, $\sum_{\alpha=1}^{25}n_{\alpha}^2=`r sum_na2`$, $\sum_{\alpha=1}^{25}T_{\alpha}^2=`r sum_Ta2`$, $\sum_{\alpha=1}^{25}T_{\alpha}n_{\alpha}=`r sum_Tana`$
+
+
+Use esses dados para estimar a proporção de rsidentes em residências alugadas na cidade e construir um intervalo de 95\% de confiança. 
